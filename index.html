@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Results summary component</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      @font-face {
+        font-family: HankenGroteskFont;
+        src: url("./HankenGrotesk-Bold.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: HankenGroteskFontMedium;
+        src: url("./HankenGrotesk-Medium.ttf") format("truetype");
+      }
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background-color: hsl(0, 0%, 100%);
+        height: 100%;
+      }
+      .main-container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+      }
+      .parent-card {
+        width: 500px;
+        height: 340px;
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 20px;
+        box-shadow: 12px 12px 16px hsl(221, 100%, 96%),
+          14px 14px 20px hsl(221, 100%, 96%);
+        position: relative;
+      }
+      .child-card {
+        width: 250px;
+        height: 340px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: hsl(252, 100%, 67%);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .title-child-card {
+        color: hsl(241, 100%, 89%);
+        font-family: HankenGroteskFont;
+        text-align: center;
+        width: auto;
+        font-size: 15px;
+        margin-top: 25px;
+      }
+      .circle-inside-card {
+        width: 130px;
+        height: 130px;
+        /* border:solid 1px black; */
+        border-radius: 50%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        background-image: linear-gradient(
+          to bottom,
+          hsla(256, 72%, 46%, 1),
+          hsla(256, 72%, 46%, 0)
+        );
+        display: flex;
+        flex-direction: column;
+      }
+      .number-inside {
+        text-align: center;
+        margin: auto;
+        font-size: 45px;
+        font-family: HankenGroteskFont;
+        color: white;
+        margin-top: 30px;
+        margin-bottom: 2px;
+      }
+      .number-inside-small {
+        color: hsl(241, 100%, 89%);
+        opacity: 0.5;
+        font-family: HankenGroteskFont;
+        font-size: 12px;
+        margin-top: 5px;
+        margin-bottom: 30px;
+      }
+      .bottom-text {
+        text-align: center;
+        font-family: HankenGroteskFontMedium;
+      }
+      .second-child-card {
+        width: 250px;
+        height: 350px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .title-summary {
+        color: black;
+        font-family: HankenGroteskFont;
+        text-align: left;
+        width: auto;
+        margin-top: 25px;
+        margin-left: 30px;
+      }
+      .content-summary {
+        width: 180px;
+        height: 25px;
+        border-radius: 6px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        padding: 5px;
+      }
+      .icon-svg {
+        margin-top: auto;
+        margin-bottom: auto;
+        height: 13px;
+        font-size: 12px;
+        /* margin-right:5px; */
+      }
+      .icon-svg-title {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 3px;
+        font-family: HankenGroteskFont;
+        font-size: 11px;
+      }
+      .icon-svg-title-value {
+        margin-top: auto;
+        margin-bottom: auto;
+        text-align: right;
+        font-family: HankenGroteskFont;
+        font-size: 11px;
+      }
+      .icon-svg-span {
+        margin-top: auto;
+        margin-bottom: auto;
+        color: darkgray;
+        opacity: 0.8;
+        font-family: HankenGroteskFont;
+        font-size: 11px;
+      }
+      @media screen and (max-width: 400px) {
+        /* .main-container{
+          flex-direction: row;
+        } */
+        .parent-card{
+          width:250px;
+          height:680px;
+        }
+        .second-child-card{
+          top:340px;
+        }
+      }
+    </style>
+    <script>
+      function refreshValue() {
+        let data = [
+          {
+            category: "Reaction",
+            score: 80,
+            icon: "./assets/images/icon-reaction.svg",
+          },
+          {
+            category: "Memory",
+            score: 92,
+            icon: "./assets/images/icon-memory.svg",
+          },
+          {
+            category: "Verbal",
+            score: 61,
+            icon: "./assets/images/icon-verbal.svg",
+          },
+          {
+            category: "Visual",
+            score: 72,
+            icon: "./assets/images/icon-visual.svg",
+          },
+        ];
+
+        document.getElementById("reaction_val").innerText =
+          data[0].score.toLocaleString();
+        document.getElementById("memory_val").innerText =
+          data[1].score.toLocaleString();
+        document.getElementById("verbal_val").innerText =
+          data[2].score.toLocaleString();
+        document.getElementById("visual_val").innerText =
+          data[3].score.toLocaleString();
+        let avg = 0;
+        avg = Math.round(
+          (data[0].score + data[1].score + data[2].score + data[3].score) / 4
+        );
+        document.getElementById("avg_result").innerText = avg.toLocaleString();
+      }
+    </script>
+  </head>
+  <body onload="refreshValue()">
+    <div class="main-container">
+      <div class="parent-card">
+        <div class="child-card">
+          <div class="title-child-card">Your Result</div>
+          <div class="circle-inside-card">
+            <label id="avg_result" class="number-inside">76</label>
+            <label class="number-inside-small">of 100</label>
+          </div>
+          <div
+            class="bottom-text"
+            style="
+              color: white;
+              font-size: 20px;
+              margin-top: 15px;
+              margin-bottom: 5px;
+            "
+          >
+            Great
+          </div>
+          <div
+            class="bottom-text"
+            style="
+              color: hsl(241, 100%, 89%);
+              font-size: 12px;
+              margin-top: 5px;
+              margin-bottom: 1px;
+            "
+          >
+            You scored higher than 65% of
+          </div>
+          <div
+            class="bottom-text"
+            style="
+              color: hsl(241, 100%, 89%);
+              font-size: 12px;
+              margin-top: 1px;
+              margin-bottom: 1px;
+            "
+          >
+            the people who have taken
+          </div>
+          <div
+            class="bottom-text"
+            style="
+              color: hsl(241, 100%, 89%);
+              font-size: 12px;
+              margin-top: 1px;
+              margin-bottom: 1px;
+            "
+          >
+            these tests.
+          </div>
+        </div>
+        <div class="second-child-card">
+          <div class="title-summary">Summary</div>
+          <div
+            class="content-summary"
+            style="background-color: hsla(0, 100%, 67%, 0.1); margin-top: 20px"
+          >
+            <svg
+              class="icon-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="#F55"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.25"
+                d="M10.833 8.333V2.5l-6.666 9.167h5V17.5l6.666-9.167h-5Z"
+              />
+            </svg>
+            <label class="icon-svg-title" style="color: hsl(0, 100%, 67%)"
+              >Reaction</label
+            >
+            <label
+              id="reaction_val"
+              class="icon-svg-title-value"
+              style="margin-left: 70px; margin-right: 5px"
+              >80
+            </label>
+            <label class="icon-svg-span" style="color: hsl(241, 100%, 89%)">
+              / 100</label
+            >
+          </div>
+          <div
+            class="content-summary"
+            style="background-color: hsla(39, 100%, 56%, 0.1); margin-top: 10px"
+          >
+            <svg
+              class="icon-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="#FFB21E"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.25"
+                d="M5.833 11.667a2.5 2.5 0 1 0 .834 4.858"
+              />
+              <path
+                stroke="#FFB21E"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.25"
+                d="M3.553 13.004a3.333 3.333 0 0 1-.728-5.53m.025-.067a2.083 2.083 0 0 1 2.983-2.824m.199.054A2.083 2.083 0 1 1 10 3.75v12.917a1.667 1.667 0 0 1-3.333 0M10 5.833a2.5 2.5 0 0 0 2.5 2.5m1.667 3.334a2.5 2.5 0 1 1-.834 4.858"
+              />
+              <path
+                stroke="#FFB21E"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.25"
+                d="M16.447 13.004a3.334 3.334 0 0 0 .728-5.53m-.025-.067a2.083 2.083 0 0 0-2.983-2.824M10 3.75a2.085 2.085 0 0 1 2.538-2.033 2.084 2.084 0 0 1 1.43 2.92m-.635 12.03a1.667 1.667 0 0 1-3.333 0"
+              />
+            </svg>
+            <label class="icon-svg-title" style="color: hsl(39, 100%, 56%)"
+              >Memory</label
+            >
+            <label
+              id="memory_val"
+              class="icon-svg-title-value"
+              style="margin-left: 70px; margin-right: 5px"
+              >92
+            </label>
+            <label class="icon-svg-span" style="color: hsl(241, 100%, 89%)">
+              / 100</label
+            >
+          </div>
+          <div
+            class="content-summary"
+            style="
+              background-color: hsla(166, 100%, 37%, 0.1);
+              margin-top: 10px;
+            "
+          >
+            <svg
+              class="icon-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="#00BB8F"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.25"
+                d="M7.5 10h5M10 18.333A8.333 8.333 0 1 0 1.667 10c0 1.518.406 2.942 1.115 4.167l-.699 3.75 3.75-.699A8.295 8.295 0 0 0 10 18.333Z"
+              />
+            </svg>
+            <label class="icon-svg-title" style="color: hsl(166, 100%, 37%)"
+              >Verbal</label
+            >
+            <label
+              id="verbal_val"
+              class="icon-svg-title-value"
+              style="margin-left: 80px; margin-right: 5px"
+              >61
+            </label>
+            <label class="icon-svg-span" style="color: hsl(241, 100%, 89%)">
+              / 100</label
+            >
+          </div>
+          <div
+            class="content-summary"
+            style="
+              background-color: hsla(234, 85%, 45%, 0.05);
+              margin-top: 10px;
+            "
+          >
+            <svg
+              class="icon-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="#1125D6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.25"
+                d="M10 11.667a1.667 1.667 0 1 0 0-3.334 1.667 1.667 0 0 0 0 3.334Z"
+              />
+              <path
+                stroke="#1125D6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.25"
+                d="M17.5 10c-1.574 2.492-4.402 5-7.5 5s-5.926-2.508-7.5-5C4.416 7.632 6.66 5 10 5s5.584 2.632 7.5 5Z"
+              />
+            </svg>
+            <label class="icon-svg-title" style="color: hsl(234, 85%, 45%)"
+              >Visual</label
+            >
+            <label
+              id="visual_val"
+              class="icon-svg-title-value"
+              style="margin-left: 80px; margin-right: 5px"
+              >72
+            </label>
+            <label class="icon-svg-span" style="color: hsl(241, 100%, 89%)">
+              / 100</label
+            >
+          </div>
+          <div
+            class="content-summary"
+            style="
+              background-color: black;
+              margin-top: 30px;
+              border-radius: 30px;
+              color: white;
+            "
+          >
+            <label
+              class="icon-svg-title"
+              style="margin-left: auto; margin-right: auto"
+              >Continue</label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">by ZHB</a>.
+    </div>
+  </body>
+</html>
